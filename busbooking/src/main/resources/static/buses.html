@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NexBus - Available Buses</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<section class="results-section" id="resultsSection">
+
+    <div class="results-header">
+        <div>
+            <h2 class="results-title">Available Buses</h2>
+            <p class="results-sub" id="routeTitle"></p>
+        </div>
+    </div>
+
+    <div class="bus-list" id="busList"></div>
+
+</section>
+
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+        <!-- STEP 1 -->
+        <div class="modal-step" id="step1">
+
+            <div class="modal-head">
+                <div>
+                    <div class="modal-bus-name" id="mBusName"></div>
+                    <div class="modal-bus-route" id="mBusRoute"></div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+
+                <h3>Select Seat</h3>
+
+                <div class="seat-grid" id="seatGrid"></div>
+
+                <button class="btn-next" id="step1Next">Continue</button>
+
+            </div>
+        </div>
+
+
+        <!-- STEP 2 -->
+        <div class="modal-step hidden" id="step2">
+
+            <div class="modal-body">
+
+                <h3>Passenger Details</h3>
+
+                <input type="text" id="paxName" placeholder="Passenger Name"><br><br>
+                <input type="number" id="paxAge" placeholder="Age"><br><br>
+
+                <button class="btn-back" id="step2Back">Back</button>
+                <button class="btn-next" id="step2Next">Continue</button>
+
+            </div>
+        </div>
+
+
+        <!-- STEP 3 -->
+        <div class="modal-step hidden" id="step3">
+
+            <div class="modal-body">
+
+                <h3>Confirm Booking</h3>
+
+                <button class="btn-back" id="step3Back">Back</button>
+                <button class="btn-confirm" id="confirmBtn">Confirm Booking</button>
+
+            </div>
+        </div>
+
+
+        <!-- STEP 4 -->
+        <div class="modal-step hidden" id="step4">
+
+            <div class="modal-body success-body">
+
+                <h2>Booking Successful 🎉</h2>
+
+                <div id="successId"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="/script.js"></script>
+
+
+<script>
+
+    /* LOAD BUS RESULTS */
+
+    const params = new URLSearchParams(window.location.search);
+
+    const from = params.get("from");
+    const to = params.get("to");
+    const date = params.get("date");
+
+    document.getElementById("routeTitle").innerText =
+    `${from} → ${to}`;
+
+
+    fetch(`/api/bus/search?from=${from}&to=${to}`)
+    .then(res => res.json())
+    .then(data => {
+
+    const busList = document.getElementById("busList");
+
+    data.forEach(bus => {
+
+    const div = document.createElement("div");
+    div.className = "bus-card";
+
+    div.innerHTML = `
+
+    <div>
+
+    <h3>${bus.busName}</h3>
+
+    <p>${bus.fromLocation} → ${bus.toLocation}</p>
+
+    <p>Departure: ${bus.departureTime}</p>
+
+    <p>Price: ₹${bus.price}</p>
+
+    </div>
+
+    <button class="btn-book">Book Now</button>
+
+    `;
+
+    div.querySelector(".btn-book")
+    .addEventListener("click", () => openBookingModal(bus));
+
+    busList.appendChild(div);
+
+    });
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexBus — Premium Bus Travel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- BACKGROUND CANVAS -->
+<div class="bg-wrapper">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="grid-overlay"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Sen<span>fo</span></a>
+        <ul class="nav-links">
+            <li><a href="#">Routes</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#">Track Bus</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="#" class="btn-ghost">Log In</a>
+            <a href="#" class="btn-primary">Sign Up Free</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            Live tracking on all routes
+        </div>
+        <h1 class="hero-title">
+            Travel without<br />
+            <em class="gradient-text">Compromise.</em>
+        </h1>
+        <p class="hero-sub">
+            Book premium intercity buses in seconds. Real-time seats,<br />
+            luxury coaches, zero hidden fees.
+        </p>
+
+        <!-- SEARCH FORM -->
+        <div class="search-card">
+            <div class="search-tabs">
+                <button class="stab active" data-tab="oneway">One Way</button>
+                <button class="stab" data-tab="return">Return</button>
+                <button class="stab" data-tab="multi">Multi-City</button>
+            </div>
+
+            <div class="search-fields">
+                <div class="sfield">
+                    <label>From</label>
+                    <div class="sfield-icon">🛫</div>
+                    <select id="fromCity">
+                        <option value="">Select city</option>
+                        <option>Mumbai</option>
+                        <option>Delhi</option>
+                        <option>Bangalore</option>
+                        <option>Pune</option>
+                        <option>Hyderabad</option>
+                        <option>Chennai</option>
+                        <option>Kolkata</option>
+                        <option>Goa</option>
+                        <option>Jaipur</option>
+                        <option>Ahmedabad</option>
+                    </select>
+                </div>
+
+                <button class="swap-cities" id="swapBtn" title="Swap cities">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+                </button>
+
+                <div class="sfield">
+                    <label>To</label>
+                    <div class="sfield-icon">🛬</div>
+                    <select id="toCity">
+                        <option value="">Select city</option>
+                        <option>Mumbai</option>
+                        <option>Delhi</option>
+                        <option>Bangalore</option>
+                        <option>Pune</option>
+                        <option>Hyderabad</option>
+                        <option>Chennai</option>
+                        <option>Kolkata</option>
+                        <option>Goa</option>
+                        <option>Jaipur</option>
+                        <option>Ahmedabad</option>
+                    </select>
+                </div>
+
+                <div class="sfield">
+                    <label>Date</label>
+                    <div class="sfield-icon">📅</div>
+                    <input type="date" id="travelDate" />
+                </div>
+
+                <div class="sfield sfield-pass">
+                    <label>Passengers</label>
+                    <div class="sfield-icon">👤</div>
+                    <select id="passengerCount">
+                        <option value="1">1 Passenger</option>
+                        <option value="2">2 Passengers</option>
+                        <option value="3">3 Passengers</option>
+                        <option value="4">4 Passengers</option>
+                        <option value="5">5 Passengers</option>
+                    </select>
+                </div>
+
+                <button class="btn-search" id="searchBtn">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <span>Search Buses</span>
+                    <div class="btn-ripple"></div>
+                </button>
+            </div>
+
+            <div class="search-tags">
+                <span class="stag">Popular:</span>
+                <button class="quick-route" data-from="Mumbai" data-to="Pune">Mumbai → Pune</button>
+                <button class="quick-route" data-from="Delhi" data-to="Jaipur">Delhi → Jaipur</button>
+                <button class="quick-route" data-from="Bangalore" data-to="Goa">Bangalore → Goa</button>
+                <button class="quick-route" data-from="Hyderabad" data-to="Chennai">Hyderabad → Chennai</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING TRUST BADGES -->
+    <div class="trust-strip">
+        <div class="trust-item">
+            <span class="trust-num">4.9★</span>
+            <span class="trust-label">Avg Rating</span>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+            <span class="trust-num">2.8M+</span>
+            <span class="trust-label">Happy Travelers</span>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+            <span class="trust-num">600+</span>
+            <span class="trust-label">Daily Routes</span>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+            <span class="trust-num">99.1%</span>
+            <span class="trust-label">On-Time Arrival</span>
+        </div>
+    </div>
+</section>
+
+<!-- RESULTS SECTION -->
+<section class="results-section hidden" id="resultsSection">
+    <div class="results-header">
+        <div>
+            <h2 class="results-title" id="resultsTitle">Available Buses</h2>
+            <p class="results-sub" id="resultsSub">Showing 5 results</p>
+        </div>
+        <div class="result-filters">
+            <button class="rfil active">All</button>
+            <button class="rfil">AC Sleeper</button>
+            <button class="rfil">Non-AC</button>
+            <button class="rfil">Cheapest</button>
+            <button class="rfil">Fastest</button>
+        </div>
+    </div>
+    <div class="bus-list" id="busList"></div>
+</section>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="bookingModal">
+
+        <!-- STEP 1: SEAT SELECTION -->
+        <div class="modal-step" id="step1">
+            <div class="modal-head">
+                <div class="modal-bus-info">
+                    <div class="modal-bus-name" id="mBusName">IntrCity SmartBus</div>
+                    <div class="modal-bus-route" id="mBusRoute">Mumbai → Pune • 22 Jan 2025</div>
+                </div>
+                <button class="modal-close" id="modalClose">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="step-indicator">
+                    <div class="step-dot active">1</div>
+                    <div class="step-line"></div>
+                    <div class="step-dot">2</div>
+                    <div class="step-line"></div>
+                    <div class="step-dot">3</div>
+                </div>
+
+                <h3 class="modal-section-title">Choose Your Seat</h3>
+
+                <div class="seat-legend">
+                    <span class="sl-item"><span class="sl-box available"></span> Available</span>
+                    <span class="sl-item"><span class="sl-box selected"></span> Selected</span>
+                    <span class="sl-item"><span class="sl-box occupied"></span> Occupied</span>
+                </div>
+
+                <div class="bus-layout">
+                    <div class="bus-front">
+                        <div class="steering">🚌</div>
+                        <div class="driver-label">Driver</div>
+                    </div>
+                    <div class="seat-grid" id="seatGrid"></div>
+                </div>
+
+                <div class="seat-summary" id="seatSummary">No seat selected</div>
+
+                <button class="btn-next" id="step1Next">Continue →</button>
+            </div>
+        </div>
+
+        <!-- STEP 2: PASSENGER DETAILS -->
+        <div class="modal-step hidden" id="step2">
+            <div class="modal-head">
+                <div class="modal-bus-name">Passenger Details</div>
+                <button class="modal-close" id="modalClose2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="step-indicator">
+                    <div class="step-dot done">✓</div>
+                    <div class="step-line active"></div>
+                    <div class="step-dot active">2</div>
+                    <div class="step-line"></div>
+                    <div class="step-dot">3</div>
+                </div>
+
+                <div class="pax-form">
+                    <div class="form-row">
+                        <div class="fg">
+                            <label>Full Name</label>
+                            <input type="text" id="paxName" placeholder="e.g. Aanya Sharma" />
+                        </div>
+                        <div class="fg">
+                            <label>Age</label>
+                            <input type="number" id="paxAge" placeholder="e.g. 28" min="1" max="99" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="fg">
+                            <label>Gender</label>
+                            <select id="paxGender">
+                                <option value="">Select</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Non-binary</option>
+                                <option>Prefer not to say</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label>Phone</label>
+                            <input type="tel" id="paxPhone" placeholder="+91 98765 43210" />
+                        </div>
+                    </div>
+                    <div class="fg full">
+                        <label>Email Address</label>
+                        <input type="email" id="paxEmail" placeholder="aanya@email.com" />
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="pb-row"><span>Base Fare</span><span id="pbBase">₹0</span></div>
+                    <div class="pb-row"><span>Convenience Fee</span><span>₹49</span></div>
+                    <div class="pb-row"><span>GST (5%)</span><span id="pbGst">₹0</span></div>
+                    <div class="pb-divider"></div>
+                    <div class="pb-row total"><span>Total</span><span id="pbTotal">₹0</span></div>
+                </div>
+
+                <div class="step2-btns">
+                    <button class="btn-back" id="step2Back">← Back</button>
+                    <button class="btn-next" id="step2Next">Review & Pay →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: CONFIRM -->
+        <div class="modal-step hidden" id="step3">
+            <div class="modal-head">
+                <div class="modal-bus-name">Confirm Booking</div>
+                <button class="modal-close" id="modalClose3">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="step-indicator">
+                    <div class="step-dot done">✓</div>
+                    <div class="step-line active"></div>
+                    <div class="step-dot done">✓</div>
+                    <div class="step-line active"></div>
+                    <div class="step-dot active">3</div>
+                </div>
+
+                <div class="confirm-ticket">
+                    <div class="ticket-header">
+                        <div class="ticket-logo">NexBus</div>
+                        <div class="ticket-id" id="tktId">TKT-XXXXXX</div>
+                    </div>
+                    <div class="ticket-route">
+                        <div class="tkt-city">
+                            <div class="tkt-time" id="tktDep">22:00</div>
+                            <div class="tkt-name" id="tktFrom">Mumbai</div>
+                        </div>
+                        <div class="tkt-line">
+                            <div class="tkt-dur" id="tktDur">8h 30m</div>
+                            <div class="tkt-divider"></div>
+                            <div class="tkt-type" id="tktType">Non-Stop</div>
+                        </div>
+                        <div class="tkt-city" style="text-align:right">
+                            <div class="tkt-time" id="tktArr">06:30</div>
+                            <div class="tkt-name" id="tktTo">Pune</div>
+                        </div>
+                    </div>
+                    <div class="ticket-details">
+                        <div class="td-item"><span>Passenger</span><strong id="tdName">—</strong></div>
+                        <div class="td-item"><span>Seat</span><strong id="tdSeat">—</strong></div>
+                        <div class="td-item"><span>Date</span><strong id="tdDate">—</strong></div>
+                        <div class="td-item"><span>Bus</span><strong id="tdBus">—</strong></div>
+                    </div>
+                    <div class="ticket-total">
+                        <span>Total Amount</span>
+                        <span class="tt-price" id="tdTotal">₹0</span>
+                    </div>
+                </div>
+
+                <div class="step3-btns">
+                    <button class="btn-back" id="step3Back">← Edit</button>
+                    <button class="btn-confirm" id="confirmBtn">
+                        <span class="confirm-text">Pay & Confirm</span>
+                        <span class="confirm-loader hidden">Booking...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: SUCCESS -->
+        <div class="modal-step hidden" id="step4">
+            <div class="modal-body success-body">
+                <div class="success-icon">🎉</div>
+                <h2 class="success-title">You're all set!</h2>
+                <p class="success-sub">Your booking is confirmed. E-ticket sent to your email.</p>
+                <div class="success-id" id="successId">Booking ID: VX-XXXXXX</div>
+                <div class="success-actions">
+                    <button class="btn-primary" id="downloadBtn">Download Ticket</button>
+                    <button class="btn-ghost" id="doneBtn">Done</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="/script.js"></script>
+</body>
+</html>
